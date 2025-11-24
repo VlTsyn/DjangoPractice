@@ -7,9 +7,9 @@ from blogs.models import Blog
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ['title', 'description', 'image']
+    fields = ['title', 'content', 'image']
     template_name = 'blog_form.html'
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blogs:blog_list')
 
 
 class BlogListView(ListView):
@@ -26,12 +26,12 @@ class BlogDetailView(DetailView):
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ['name', 'description']
+    fields = ['title', 'content', 'image']
     template_name = 'blog_form.html'
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blogs:blog_list')
 
 
 class BlogDeleteView(DeleteView):
     model = Blog
     template_name = 'blog_confirm_delete.html'
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blogs:blog_list')

@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+
+{% block description%}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skyblogs</h1>
+    <p class="lead">Наши блоги</p>
+</div>
+{% endblock%}
+
+{% block content%}
+<ul class="list-group">
+    {% for blog in blogs %}
+        <li>
+            <a href="{% url 'blogs:blog_detail' blog.pk %}">{{ blog.title }}</a> - {{ blog.views_count }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock%}
