@@ -15,4 +15,4 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'блог'
         verbose_name_plural = 'блоги'
-        ordering = ['views_count',]
+        ordering = ['-views_count',]

@@ -11,6 +11,7 @@
 <p>Дата публикации: {{ blog.created_at }}</p>
 <p>{{ blog.content }}</p>
 <p>Количество просмотров: {{ blog.views_count }}</p>
+<p>{% if blog.publication %} Опубликовано {% else %} Не опубликовано {% endif %}</p>
 <a href="{% url 'blogs:blog_update' blog.pk %}" class="btn btn-secondary">Редактировать</a>
 <a href="{% url 'blogs:blog_delete' blog.pk %}" class="btn btn-danger">Удалить</a>
 <a href="{% url 'blogs:blog_list'%}" class="btn btn-primary">Вернуться назад</a>
