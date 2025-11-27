@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block description%}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skyblogs</h1>
+    <p class="lead">Удаление блога</p>
+</div>
+{% endblock%}
+
+{% block content%}
+<p>Вы действительно хотите удалить '{{ blog.title }}'?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'blogs:blog_list' %}" class="btn btn-primary">Отменить</a>
+</form>
+{% endblock%}
