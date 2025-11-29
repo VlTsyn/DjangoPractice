@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html'%}
+{% load my_tags %}
+
+{% block description%}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skystore</h1>
+    {% if object %}
+    <p class="lead">Редактирование товара</p>
+    {% else %}
+    <p class="lead">Добавление товара</p>
+    {% endif %}
+</div>
+{% endblock%}
+
+{% block content%}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if object %}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'catalog:catalog' %}" class="btn btn-primary">Отменить</a>
+    <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+    {% else %}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'catalog:catalog' %}" class="btn btn-primary">Отменить</a>
+    {% endif %}
+</form>
+{% endblock%}
