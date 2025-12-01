@@ -1,0 +1,14 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+<div class="container">
+    <h1 class="lead">{{ user.email }}</h1>
+    <img src="{{ user.avatar | media_filter }}" style="width: 100px; height: 100px;" class="img-thumbnail rounded-circle">
+    <p>Имя:{{ user.first_name }}</p>
+    <p>Фамилия:{{ user.last_name }}</p>
+    <p>Телефон:{{ user.phone }}</p>
+    <p>Страна:{{ user.country }}</p>
+    <a class="mb-2 btn btn-lg btn-block btn-outline-primary" href="{% url 'users:user_update' user.pk %}" role="button">Редактировать</a>
+</div>
+{% endblock %}

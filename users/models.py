@@ -5,8 +5,10 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Email')
 
+    first_name = models.CharField(max_length=35, verbose_name='Имя', blank=True, null=True, help_text='Введите имя')
+    last_name = models.CharField(max_length=35, verbose_name='Фамилия', blank=True, null=True, help_text='Введите фамилию')
     phone = models.CharField(max_length=15, verbose_name='Телефон', blank=True, null=True, help_text='Введите номер телефона')
-    avatar = models.ImageField(upload_to='users/avatars/',verbose_name='Аватар', blank=True, null=True, help_text='Загрузите фото профиля')
+    avatar = models.ImageField(upload_to='avatars/',verbose_name='Аватар', blank=True, null=True, help_text='Загрузите фото профиля')
     country = models.CharField(max_length=35, verbose_name='Страна', blank=True, null=True, help_text='Ваша страна')
 
     USERNAME_FIELD = 'email'

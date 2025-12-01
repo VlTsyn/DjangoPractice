@@ -1,9 +1,9 @@
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import DetailView
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserForm
 from users.models import User
 
 
@@ -23,3 +23,17 @@ class RegisterView(CreateView):
         from_email = 'Testmail123987@yandex.ru'
         recipient_list = [user_email]
         send_mail(subject, message, from_email, recipient_list)
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'users/user_profile.html'
+    context_object_name = 'user'
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserForm
+
+    def get_success_url(self):
+        return reverse_lazy('users:user_profile', kwargs={'pk': self.object.pk})
