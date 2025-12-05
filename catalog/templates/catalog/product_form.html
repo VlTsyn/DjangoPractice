@@ -19,7 +19,9 @@
     {% if object %}
     <button type="submit" class="btn btn-primary">Сохранить</button>
     <a href="{% url 'catalog:catalog' %}" class="btn btn-primary">Отменить</a>
+    {% if 'catalog.can_unpublish_product' in perms %}
     <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+    {% endif %}
     {% else %}
     <button type="submit" class="btn btn-primary">Сохранить</button>
     <a href="{% url 'catalog:catalog' %}" class="btn btn-primary">Отменить</a>

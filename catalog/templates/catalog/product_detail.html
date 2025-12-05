@@ -10,6 +10,7 @@
             <h2>Цена: {{ product.price }} руб.</h2>
             <p>Категория: {{ product.category }}</p>
             <p>Описание: {{ product.description | truncatechars:100 }}</p>
+            <p>Владелец: {{ product.owner }}</p>
             {% if user.is_authenticated %}
             <a class="mb-2 btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
             {% endif %}

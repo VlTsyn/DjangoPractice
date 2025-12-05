@@ -19,7 +19,7 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
 
 
 class UserForm(StyleFormMixin, ModelForm):
-    """Форма для модели Product"""
+    """Форма для модели User"""
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'avatar', 'phone', 'country')
