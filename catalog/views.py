@@ -1,11 +1,10 @@
-from itertools import product
-
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView, TemplateView, View
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 from catalog.forms import ProductForm
 from catalog.models import Product
@@ -37,13 +36,13 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
         return super().has_permission()
 
 
-
 class CatalogListView(ListView):
     model = Product
     template_name = 'catalog/catalog.html'
     context_object_name = 'products'
 
 
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
