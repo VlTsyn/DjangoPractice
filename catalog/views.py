@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
@@ -70,8 +71,15 @@ class CatalogListView(CategoriesMixin, ListView):
     template_name = 'catalog/catalog.html'
     context_object_name = 'products'
 
+    def get_queryset(self):
+        queryset = cache.get('catalog_cache')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('catalog_cache', queryset, 60 * 15)
+        return queryset
 
-# @method_decorator(cache_page(60 * 15), name='dispatch')
+
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(CategoriesMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
