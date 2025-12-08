@@ -10,7 +10,8 @@
             <h2>Цена: {{ product.price }} руб.</h2>
             <p>Категория: {{ product.category }}</p>
             <p>Описание: {{ product.description | truncatechars:100 }}</p>
-            {% if user.is_authenticated %}
+            <p>Владелец: {{ product.owner }}</p>
+            {% if 'catalog.can_unpublish_product' in perms or user == product.owner%}
             <a class="mb-2 btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
             {% endif %}
             <button type="button" class="mb-2 btn btn-lg btn-block btn-outline-primary">Купить</button>
